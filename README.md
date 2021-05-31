@@ -1,56 +1,27 @@
-﻿# AzureVM
+
 Setting Up Azure VMs
-## 13.1-13.3 Student Guide: ELK Stack Project Week
 
-### Overview
-
-This week, you will set up a cloud monitoring system by configuring an ELK stack server.
-
-### Week Objectives
-
-You will use the following skills and knowledge to complete the following project steps:
 
 - Deploying containers using Ansible and Docker.
 - Deploying Filebeat using Ansible.
 - Deploying the ELK stack on a server.
 - Diagramming networks and creating a README.
 
-**Note:** While you must complete your projects individually, you can work through problems together, and should ask instructional staff for help if you get stuck.
 
-**Important:** Due to Azure Free account limitations, you can only utilize 4vCPUs per region in Azure. Because of this, we will need to create a _new_ vNet in another region for our ELK server.
 
-### Lab Environment
 
-You will continue using your personal Azure account and build upon your existing Azure VMs. You will **not** be using your cyberxsecurity accounts.
-
-### Additional Resources
+Resources
 - [Ansible Documentation](https://docs.ansible.com/ansible/latest/modules/modules_by_category.html)
 - [`elk-docker` Documentation](https://elk-docker.readthedocs.io/#Elasticsearch-logstash-kibana-elk-docker-image-documentation)
 - [Virtual Memory Documentation](https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html)
 - ELK Server URL: http://your-IP:5601/app/kibana#/home?_g=()
 - [Docker Commands Cheatsheet](https://phoenixnap.com/kb/list-of-docker-commands-cheat-sheet)
 
-### Slideshow
-
-The slideshow to this week is located on Google Drive here: [ELK Stack Project Week (13) Slides](https://docs.google.com/presentation/d/1b0jbp5L_ws2iCFuOSnU7BfoXb6oSiWccqmwXKk8yJ0w/edit#slide=id.g4789b2c72f_0_6)
 
 
----
+Configuring an ELK Server
 
-
-## Day 1: Configuring an ELK Server
-
-Lectures cover the following:
-
-  - Give an overview of the ELK stack and how it performs network security monitoring. This overview will also give you valuable context for why you're configuring and deploying these tools during the week.
-
-  - Provide the project overview as well as suggested milestones for each day. 
-
-  - Due to Azure Free account limitations, you can only utilize 4vCPUs per region in Azure. Therefore, we will need to create a new vNet in another region for our ELK server.
-
-  - By the end of the project, we will have an ELK server deployed and receiving logs from all three web VMs created in the previous cloud weeks.
-
-Activities involve the following: 
+Involves the following: 
 
   - Create a new vNet in Azure in a different region, within the same resource group.
   - Create a peer-to-peer network connection between your vNets.
@@ -60,62 +31,7 @@ Activities involve the following:
   - Run the playbook to launch the container.
   - Restrict access to the ELK VM.
 
-<details> <summary> <b> Click here to view the 13.1 Student Guide. </b> </summary>
-
 ---
-
-### 01. Project Overview  
-
-The purpose of project week is to provide an opportunity to combine everything you've learned in order to create and deploy a live security solution.
-
-- This boot camp includes three projects in total. In the next two, you will expand on the work they started this week, developing a portfolio reflective of your increasingly sophisticated skill-set.
-
-This week, you will deploy an ELK monitoring stack within your virtual networks. This will allow you to monitor the performance of your web server that is running DVWA.
-
-- In particular, the ELK stack allows analysts to:
-
-  - Easily collect logs from multiple machines into a single database.
-
-  - Quickly execute complex searches, such as: _Find the 12 internal IP addresses that sent the most HTTP traffic to my gateway between 4 a.m. and 8 a.m. in April 2019._
-
-  - Build graphs, charts, and other visualizations from network data.
-
-At the end of the week, you will have a fully functional monitoring solution, live on the cloud. This will be a major achievement for a few reasons:
-
-- Deploying, configuring, and using an ELK stack is a common task for network engineers, SOC analysts, and other security professionals. Completing this project will be proof of your skills, which you can present to hiring managers.
-
-- The ELK stack is very commonly used in production. You will likely work for organizations that use either ELK or Splunk, which is covered later in the course. Experience with both is a great addition to a job application.
-
-- You can expand this network with additional machines on your own time to generate a lot of interesting log information. This sort of independent research is useful for learning, and hiring managers love to see it.
-
-The amount that you have learned in order to complete this project, including systems administration, configuration as code, virtualization, and cloud deployment, is substantial. 
-
-Congratulations on having made it this far!
-
-#### Project Deliverables
-
-As you work through the project, you will develop the following "deliverables" that you can take to job interviews:
-
-- **Network diagram**: This document is an architecture diagram describing the topology of your network.
-
-- **Technical brief**: Answers to a series of questions explaining the important features of the suite, completed after deploying the stack.
-
-- **GitHub repository**: Instructions are provided in this week's homework as to how to set up a Github account. After completing the project, you will save your work to a database, called a Git repository, along with an in-depth description of the project. This will make it easy for you to redeploy your work in the future, as well as share it with others.
-
-You will also be prompted to talk about your projects as they pertain to specific cybersecurity domains. 
-
-#### Today's Class
-
-The rest of today's class will proceed as follows:
-
-- Introduction to ELK: An overview of the technologies that make up the ELK stack and its capabilities.
-
-- Project Work: Working hands-on through the project steps to develop your networks.
-
-You can complete this project even if you don't have all four VMs set up. Missing VMs can be added after the project tasks are completed. 
-
-
-### 02. Instructor Do: Introduction to ELK
 
 Before deploying an ELK Stack, let's cover what the stack can do and how it work. You should be familiar with ELK from previous units:
 
@@ -143,7 +59,7 @@ In summary:
 
 Together, these three tools provide security specialists with everything they need to monitor traffic in any network.
 
-#### The Beats Family
+The Beats Family
 
 The ELK stack works by storing log data in Elasticsearch with the help of Logstash.
 
@@ -175,17 +91,6 @@ ELK officially supports eight Beats. You will use two of them in this project:
 
 You can find documentation about the other Beats at the official Elastic.co site: [Getting Started with Beats](https://www.elastic.co/guide/en/beats/libbeat/current/getting-started.html).
 
-### 03. Instructor Do: Project Overview
-
-Now it's time to begin deploying it. In this section, we will:
-
-- Describe exactly what you will be building.
-
-- Lay out the milestones that you should complete each day.
-
-After that, you will spend the rest of the class configuring and deploying your ELK stack.
-
-#### Project Setup
 
 The goal of this project is to add an instance of the ELK stack to a new virtual network in another region in Azure and configure your 3 Web VMs to send logs to it.
 
@@ -237,19 +142,7 @@ Note: You will install an ELK container on the new VM, rather than setting up ea
 
 Remember that you took a similar approach when creating an Ansible control node within the network. You installed an Ansible container rather than installing Ansible directly. This project uses the same simplifying principle, but to even greater effect.
 
-#### Project Milestones
-
-The suggested milestones for each day are the following:
-
-- **Day 1** (Today): Configure the ELK server.
-
-- **Day 2**: Complete installation of Filebeat and Metricbeat.
-
-- **Day 3**: Finish any outstanding tasks from Day 2 and spend the majority of class finishing your network diagrams and answering questions in the brief.
-
-For the remainder of the day, we will work on configuring an ELK server within your virtual network.
-
-#### Troubleshooting Theory
+Troubleshooting Theory
 
 
 Before we dive into the work today, let's briefly enforce the importance of independent troubleshooting as a means to not only solve the problem at hand, but also learn more about the technology that you are working with.  
@@ -283,7 +176,7 @@ In the context of this project, removing half of your variables could mean:
 Another effective strategy is to change only one thing before your retest. This is especially helpful when troubleshooting code. If you change several things before you re-test, you will not know if any one of those things has helped the situation or made it worse.
 
 
-#### Day 1 References
+References
 
 - For more information about ELK, visit [Elastic: The Elastic Stack](https://www.elastic.co/elastic-stack).
 
@@ -297,7 +190,7 @@ Another effective strategy is to change only one thing before your retest. This 
 
 - [Split-Half Search](https://www.peachpit.com/articles/article.aspx?p=420908&seqNum=3)
 
-### 04.  ELK Installation
+ELK Installation
 
 - [Day 1 Activity File: ELK Installation](Activities/Stu_Day_1/Unsolved/ReadMe.md) 
 
@@ -305,9 +198,6 @@ Another effective strategy is to change only one thing before your retest. This 
 
 ---
 
-### End of Day 1 Milestone
-
-In this class, you:
 
 - Deployed a new VM on your virtual network.
 - Created an Ansible play to install and configure an ELK instance.
@@ -318,8 +208,7 @@ Completing these steps required you to leverage your systems administration, vir
 </details>
 
 ---
-
-## Day 2: Filebeat
+Filebeat
 
 Lectures cover the following
 
@@ -362,8 +251,6 @@ If you have not completed all Day 1 activities, you should finish them before co
  **Note:** The Resources folder includes an `ansible.cfg` file. You will not need to do anything with this file. It's included in case a you accidentally edit or delete your configuration file.
 
 
-### End of Day 2 Milestone
-
 If your ELK server is receiving logs, congratulations! You've successfully deployed a live, functional ELK stack and now have plays that can:
 
 - Install and launch Docker containers on a host machine.
@@ -376,7 +263,7 @@ Even more significant is that you've done all of this through automation with An
 
 ---
 
-## Day 3: Exploration, Diagramming and Documentation
+Exploration, Diagramming and Documentation
 
 Lectures will cover:
 
@@ -395,7 +282,7 @@ Activities involve the following:
 
 ---
 
-### 01. Day 3 Overview
+Overview
 
 Today's lesson will proceed as follows:
 
@@ -411,7 +298,7 @@ Today's lesson will proceed as follows:
   - You will also have the opportunity to answer questions about the project as it relates to different cybersecurity domains.
 
 
-### 02. Exploring Kibana
+Exploring Kibana
 
 Now that we have a working instance of Kibana, we will learn a bit about how to use it.
 
@@ -424,7 +311,7 @@ Kibana is an interface to such data, and allows cyber professionals to gain insi
 
 The following walkthrough provides a quick overview of using Kibana.
 
-#### Kibana Walkthrough
+Kibana Walkthrough
 
 1. - Start by importing Kibana's Sample Web Logs data.
 
@@ -490,7 +377,7 @@ The following walkthrough provides a quick overview of using Kibana.
 
    - This data is still filtered by traffic originating from the United States.
 
-4. Click the hamburger dropdown menu again and return to the **Dashboard** option listed under **Kibana**.
+Click the hamburger dropdown menu again and return to the **Dashboard** option listed under **Kibana**.
 
     ![](Images/kibana/Discover.png)
 
@@ -501,7 +388,7 @@ The following walkthrough provides a quick overview of using Kibana.
    - In the next activity, we will have the opportunity to explore these logs further and gain more insight from the traffic.
 
 
-### 03.  Activity: Exploring Kibana 
+Activity: Exploring Kibana 
 
 
   - [Activity File: Exploring Kibana](Activities/Stu_Day_3/Exploring-Kibana/Unsolved.md)
@@ -539,173 +426,3 @@ It's okay if students are unsure which domain you want to focus on. You can eith
 - In Projects 2 and 3, you will complete similar extension activities. Offensive and defensive security will be included as additional domains in these later projects.
 
 - Additionally, during Career Prep week, we will discuss how you can adapt your interview responses for Demo Day networking.
-
-#### Responding to Technical Questions
-
-In this section, we will walk through the process of answering technical interview questions.  
-
-Interviewers frequently ask open-ended questions like: "How you would secure access to a cloud network?"
-
-- Answering such questions can feel difficult at first. The question is indirect, with multiple possible answers. 
-- But you have valuable experience that you can draw on to provide a compelling response.
-
-We'll begin by walking through the structure of a good response. Then we will look at some example answers that incorporate specific details from Project 1.
-
-#### Structure of Good Responses
-
-- Interviewers do not want you to immediately supply a direct answer, even if it's the right one. 
-- The point of open-ended questions is to see if you can explain your thought process and rationale.
-
-- Good responses do more than just provide an answer. They also demonstrate that you truly understand the question and solution.
-
-Regardless of the specific question, good responses all do the following:
-
-- Restate the problem.
-- Provide a concrete example scenario.
-- Explain the solution requirements.
-- Explain the solution details.
-- Identify advantages and disadvantages of the solution. 
-
-Ensuring all of your responses to open-ended technical questions include these components will help you prove to interviewers your competency and expertise. Next, we will look at a specific interview question and apply this framework using examples from Project 1.
-
-#### Sample Question #1
-
-Here is a sample question from the Cloud Security domain:
-
-**Question**: How would you control access to a cloud network?
-
-Let’s walk through the steps to answer this question:
-
-1. **Restate the Problem**
-   - When restating the question in your own words, add additional details to demonstrate you understand what is being asked and why.
-
-    - Example: "It's important that organizations control access to a cloud network, especially since it has resources that only the engineering team should be able to access. Following the principle of least privilege, you want to make sure engineers can access it easily, but no one else can." 
-
-
-2. **Provide a Concrete Example Scenario**
-
-   - Use the parameters of the question to create an example scenario of the problem you just restated. This makes the problem easier to talk through and further demonstrates your experience with the topic. 
-
-   - Use your class experience to form scenarios. All your assignments are legitimate evidence of your technical background and experience, and can be referenced in your answers to open-ended questions.
-
-   - Example: "In Project 1 of my cybersecurity bootcamp, we solved an almost identical problem. In that project, we deployed a virtual network containing several VMs to Azure, which only we and our instructional team were supposed to be able to access. Just as an organization would limit cloud network access to only engineers, we had to implement remote access controls limiting access to only a handful of authorized individuals."
-
-
-3. **Explain the Solution Requirements**
-
-
-    - Before explaining the details of your solution, explain the high-level actions you took at each step and what they accomplished.
-
-
-    - Example: "After deploying the network, I first had to configure a network security group around the whole subnet. This blocked traffic from all IP addresses, except for mine, my partners', and my instructors'. This NSG allowed inbound access to only one machine on the internal network, the jump box.
-    
-       Then, I configured additional NSGs on the VMs within the subnet. This allowed connections only between the jump box and other local IP addresses.
-
-
-       Finally, I forced the use of SSH keys to eliminate vulnerability to password-based brute-force."
-
-
-    - Note: This example lists three high-level steps, including tools used and what each step accomplished. It does not explain exactly how you implemented each step.
-
-
-4. **Identify Advantages and Disadvantages** 
-
-* Point out why your solution works in general. Then acknowledge any potential shortcomings and how you would address them.
-
-
-    - Example:  "This solution worked well for my project because it ensured only the selected users had access. However, it is difficult to maintain and scale because it requires updating the NSG every time a new user requires access to the network. In addition, securely using SSH keys can be tricky in the long run. An alternative solution addressing these shortcomings would be implementing a VPN gateway to the private network. This would allow us to manage and monitor users more safely and scalably."
-
-
-    - Note: This reflection further demonstrates to the interviewer that you understand not only the problem and solution, but also the tradeoffs of your solution.
-
-
-5. **Explain the Solution Details**
-
-    - Now that you explained the high-level steps and reflected on the pros and cons, explain the specifics of how you would implement the solution. The examples below are shortened for brevity, but real answers would typically include considerably more detail.
-
-    - Example: "To configure access controls around the entire subnet, I created an NSG with the following ruleset: […] These rules allow access to the jump box from only the specified IP addresses specified.
-
-       Then, to configure access controls within the subnet, I created NSGs with the following ruleset: […] These rules allow the VMs within the network to communicate only with each other and with the jump box.
-
-       To force the use of SSH keys, I modified the following configurations in the VMs on the network: [...] This ensures that password brute-force attacks will always fail."
-
-<details>
-<summary> (Optional) Answering Sample Question #2 </summary>
-<br>
-
-**Question**: What is the most difficult networking bug you've ever faced, and how did you resolve it?
-
-  - Note: This question is a bit different from the one before. For instance, there is no explicit problem to restate. Fortunately, the same response structure will still work, with a few small tweaks.
-
-
-1. **Restate the Problem** 
-
-   - This question does not pose a specific problem for you to explore. Instead, it requires that you select and explore one of your own debugging experiences. 
-
-2. **Provide a Concrete Example Scenario**
-
-   Select a debugging experience and explain the problem that you had to debug. Do this by answering the following questions:
-
-   - In which part of the project did you encounter the most annoying bug? Consider the following high-level tasks:
-
-     - Creating Azure VM deployments.
-     - Configuring VMs with Ansible.
-     - Installing and Running ELK with Docker.
-     - Implementing access controls.
-
-
-    - What were you trying to implement when you encountered this bug? If applicable, what error message did you get? For example: installing Docker, deploying infrastructure.
-    
-    - What did you expect to happen? What would have happened if everything went well?
-    
-    - What actually happened? What went wrong that you didn't expect?
-
-
-    - Based on the above error output, how did you determine your first debugging steps?
-    
-    - What did you discover as you performed your debugging steps?
-    
-    - Which technique was successful?
-
-
-3. **Solution Requirements and Details**
-
-   - In addition to explaining which debugging step was successful, elaborate on the following:
-   
-     - How did you ultimately implement the solution so that you could move on?
-   
-     - How did you verify that your solution worked?
-   
-     - Based on your solution, what was broken in the first place?
-   
-     - Why did your solution work?
-
-
-4. **Explain Advantages and Disadvantages**
-
-   - Finally, consider the following:
-
-     - Why was this a good solution for the circumstances?
-
-     - Does the same solution work for larger projects? Why or why not?
-
-     - If a different solution is necessary, what would you use instead?
-
-</details>
-
-### 05. Project Communication and Further Exploration
-
-- [Activity File: Diagramming the Network](Activities/Stu_Day_3/Diagram/Unsolved.md)
-- [Activity File: Completing the README](Activities/Stu_Day_3/Create-Readme/Unsolved.md)
-- [Activity File: Interview Questions](Activities/Stu_Day_3/Interview/Unsolved.md)
-- [Activity File: Kibana Continued](Activities/Stu_Day_3/Kibana-Continued/Unsolved.md)
-
-
-### 06. Turn Off Machines and Wrap-Up
-
-After you complete your diagrams, finish your README, and/or present your work, make sure you **turn off** your virtual machines.
-
-- Navigate to `portal.azure.com`.
-- Search for and select **Virtual machines**.
-- Select every VM in the list.
-- Click **Stop**. This will ensure you're never charged for any of the machines you used in the project.
