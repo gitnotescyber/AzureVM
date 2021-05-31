@@ -100,7 +100,6 @@ Since you will be building off of that week, let's take a moment to review the n
 
 This network contains:
 
-  ![Cloud Network](Images/Finished-Cloud-Diagram.png)
 
 - A gateway. This is the jump box configured during the cloud security week.
 
@@ -192,9 +191,6 @@ References
 
 ELK Installation
 
-- [Day 1 Activity File: ELK Installation](Activities/Stu_Day_1/Unsolved/ReadMe.md) 
-
-- [Day 1 Resources](Activities/Stu_Day_1/Unsolved/Resources/)
 
 ---
 
@@ -242,11 +238,9 @@ Before  working on the activity, let's review the following about Filebeat:
 
 If you have not completed all Day 1 activities, you should finish them before continuing onto the Filebeat installation. 
 
-### 02. Day 2 Filebeat Installation
+Filebeat Installation
 
-- [Day 2 Activity File: Filebeat Installation](Activities/Stu_Day_2/Unsolved/ReadMe.md) 
 
-- [Day 2 Resources](Activities/Stu_Day_2/Unsolved/Resources/)
 
  **Note:** The Resources folder includes an `ansible.cfg` file. You will not need to do anything with this file. It's included in case a you accidentally edit or delete your configuration file.
 
@@ -277,8 +271,7 @@ Activities involve the following:
   - Craft interview response questions.
 
 
-<details>
-<summary> <b> Click here to view the 13.3 Student Guide. </b> </summary>
+
 
 ---
 
@@ -327,8 +320,6 @@ Kibana Walkthrough
 
       ![](Images/kibana/sampledata.png)
 
-
-   -  Click **View Data** to pull up the dashboard.
 
 2. A brief overview of the interface, starting with the time dropdown in the top right of the screen:
 
