@@ -388,41 +388,15 @@ Click the hamburger dropdown menu again and return to the **Dashboard** option l
    - In the next activity, we will have the opportunity to explore these logs further and gain more insight from the traffic.
 
 
-Activity: Exploring Kibana 
 
 
-  - [Activity File: Exploring Kibana](Activities/Stu_Day_3/Exploring-Kibana/Unsolved.md)
-  - [Solution Guide: Exploring Kibana](Activities/Stu_Day_3/Exploring-Kibana/Solved.md)
 
 
-### 04. Project Communication - Documenting, Diagramming, and Discussing
 
-You have produced an impressive deliverable that you can display to potential employers and your professional network. Today you will have the opportunity to develop network diagrams and README documentation. You will also add the project to a GitHub repository for homework. 
 
-Another important piece of presenting this project in a professional manner is verbally communicating all the skills and knowledge they've gained so far.  
 
-In this section, we will introduce an optional section of the project in which you will answer mock interview responses. Responses should demonstrate a robust understanding of your work and the ability to relate it to various security domains. 
 
-#### Mock Interview Questions Overview
 
-- The work you did on this first project covers a wide range of topics including cloud, network security, and logging and monitoring.
-- When networking and talking to potential employers, you should be able to reference the work done on this project to answer specific interview questions or demonstrate your skills within a specific domain. This section will teach you how to do this.
-- First we'll explain a general structure for answering common technical interview questions. We will then show you examples that use this structure, and also use specific examples from Project 1.
-- Then it's your turn. First you will choose a domain that you're interested in pursuing as a career. For this project, you will choose from the following domains:
 
-  - Network security
-  - Cloud security
-  - Logging and monitoring
-- Within each domain, we have provided a set of interview questions.  For each question, you will think about specific tasks completed in Project 1 that you can use to answer the question.
 
-For this section, you will:
 
-- Select a question.
-
-- Write a one-page response that answers the question using specific examples from your work on Project 1. Your response should flow and read like a presentation while still keeping the general structure of the technical question response guidelines. 
-
-It's okay if students are unsure which domain you want to focus on. You can either choose the one you're most comfortable discussing, or complete the tasks in two or all three domains.
-
-- In Projects 2 and 3, you will complete similar extension activities. Offensive and defensive security will be included as additional domains in these later projects.
-
-- Additionally, during Career Prep week, we will discuss how you can adapt your interview responses for Demo Day networking.
